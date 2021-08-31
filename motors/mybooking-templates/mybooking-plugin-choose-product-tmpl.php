@@ -10,7 +10,7 @@
                 <div class="dp-in">
                   <div class="listing-car-item" style="width: 100%">
                     <div class="listing-car-item-inner">
-                          <div class="text-center"> 
+                          <div class="car-image text-center"> 
                             <img class="img-responsive" src="<%=product.photo%>" 
                                 data-retina="<%=product.photo%>" style="display: block; margin: 0 auto" 
                                 alt="<%=product.name%>">
@@ -23,8 +23,20 @@
                                     </div>
                                 </div>
                                 <div class="car-title" style="height: 36px">
-                                    <%=product.name%>
+                                    <%=product.name%><br>
+                                    <span style="font-size:12px;font-weight:400;"><%=product.short_description%><span>
                                 </div>
+                                <% if (product.key_characteristics) { %>
+                                  <div class="mybooking-product_characteristics">
+                                    <% for (characteristic in product.key_characteristics) { %>
+                                      <div class="mybooking-product_characteristics-item">
+                                        <% var characteristic_image_path = '<?php echo esc_url( get_site_url().'/wp-content/plugins/mybooking-reservation-engine/assets/images/key_characteristics/' ) ?>'+characteristic+'.svg'; %>
+                                        <img class="mybooking-product_characteristics-img" src="<%=characteristic_image_path%>" />
+                                        <span class="mybooking-product_characteristics-key"><%=product.key_characteristics[characteristic]%> </span>
+                                      </div>
+                                    <% } %>
+                                  </div>
+                                <% } %>
                             </div>
                             <div class="car-meta-bottom">
                                 <a class="button btn-choose-product" data-product="<%=product.code%>"><?php echo _x( 'Book it!', 'renting_choose_product', 'mybooking-wp-plugin') ?></a>
@@ -71,4 +83,4 @@
           </div> 
         </div> 
       </div>
-    </script> 
+    </script>

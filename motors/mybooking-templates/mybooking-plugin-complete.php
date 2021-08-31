@@ -7,7 +7,7 @@
           <div class="reservation_form_container">
             <form id="form-reservation" name="reservation_form" autocomplete="off" class="wpcf7-form">
                           
-              <h2 class="h3 customer_component"><?php echo esc_html_x( "Customer's details", 'renting_complete', 'mybooking-wp-plugin') ?></h2>
+              <h2 class="customer_component"><?php echo esc_html_x( "Customer's details", 'renting_complete', 'mybooking-wp-plugin') ?></h2>
 
               <div class="row customer_component">
                 <div class="col-md-6 col-sm-6">
