@@ -1,4 +1,4 @@
-    <section class="widget widget_mybooking_rent_engine_selector reservation-step stm-contact-us-form-wrapper">
+    <section class="widget widget_mybooking_rent_engine_selector reservation-step mybooking-selector stm-template-car_rental stm_rent_car_form">
       <form
         name="widget_search_form"
         method="get"
