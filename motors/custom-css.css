@@ -1,0 +1,11 @@
+form[name=widget_search_form] select,
+form[name=search_form] select,
+form[name=reservation_form] select,
+form[name=search_products_form] select {
+    opacity: 1 !important; 
+    visibility: visible !important;
+}
+.form-horizontal .form-group {
+    margin-right: auto;
+    margin-left: auto;
+}
