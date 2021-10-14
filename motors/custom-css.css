@@ -1,3 +1,15 @@
+/** 
+    MYBOOKING PLUGIN 
+    ----------------
+    Motors Theme CSS adaptation example
+    Font sizes and colors could be different if you are using templates o child themes
+**/
+
+/* Selector form */
+form[name="widget_search_form"] input[type="text"], form[name="widget_search_form"] select {
+    height: 38px;
+}
+
 form[name=widget_search_form] select,
 form[name=search_form] select,
 form[name=reservation_form] select,
@@ -5,7 +17,256 @@ form[name=search_products_form] select {
     opacity: 1 !important; 
     visibility: visible !important;
 }
+
+input[type="checkbox"] {
+    -webkit-appearance: checkbox!important;
+    -moz-appearance: checkbox!important;
+    appearance: checkbox!important;
+}
+
 .form-horizontal .form-group {
     margin-right: auto;
     margin-left: auto;
+}
+
+.mybooking-selector {
+    max-width: 350px!important;
+    padding: 2rem;
+    background-color: #F47B12;
+    float: right;
+    font-family: 'Montserrat'!important;
+}
+
+.mybooking-selector label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+.mybooking-selector_pickup-date,
+.mybooking-selector_pickup-time,
+.mybooking-selector_return-date,
+.mybooking-selector_return-time,
+span.select2 {
+    width: 48%!important;
+    height: 38px;
+    float: left;
+}
+
+.mybooking-selector_pickup-place + span.select2,
+.mybooking-selector_return-place + span.select2 {
+    width: 100%!important;
+    height: 38px;
+}
+
+.mybooking-selector .select2-container--default .select2-selection--single {
+    height: 38px;
+}
+
+.mybooking-selector .select2-container--default .select2-selection--single .select2-selection__rendered {
+     line-height: 38px;
+}
+
+.mybooking-selector .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 37px;
+}
+
+.mybooking-selector_pickup-date,
+.mybooking-selector_return-date {
+    margin-right: 4%;
+}
+
+.mybooking-btn_search {
+    background-color: #273f44!important;
+    box-shadow: 0 2px 0 #1f3236!important;
+}
+
+/* Calendar */
+.mybooking-selector .ui-datepicker table th span {
+    font-size: .8em !important;
+}
+
+.mybooking-selector .ui-datepicker .ui-datepicker-header {
+    background-color: #273F44!important;
+    border-radius: 0!important;
+}
+
+.mybooking-selector .ui-datepicker .ui-datepicker-header {
+    color: #f0c540;
+}
+
+.mybooking-selector .ui-widget-header a {
+    color: #FFF!important;
+}
+
+.mybooking-selector div.ui-datepicker {
+    padding: 0;
+    border-radius: 0;
+    z-index: 99999!important;
+}
+
+.mybooking-selector .ui-datepicker-next::before,
+.mybooking-selector .ui-datepicker-prev::before {
+    line-height: 40px;
+}
+
+.mybooking-selector .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .mybooking-selector .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border: none!important;
+    background: transparent!important;
+}
+
+.mybooking-selector .ui-datepicker td .ui-state-hover {
+    background-color: #f0c540!important;
+    color: #273F44!important;
+    border-radius: 0!important;
+    text-shadow: none!important;
+}
+
+/* Proceso */
+.reservation-step {
+    margin: 3rem 0;
+}
+
+.reservation-step .listing-cars-grid {
+    justify-content: flex-start;
+}
+
+.reservation-step .listing-car-items .listing-car-item .listing-car-item-inner {
+    border: 1px solid #DDD;
+}
+
+.reservation-step .listing-car-items .listing-car-item .listing-car-item-meta {
+    background-color: #FFF;
+}
+
+.reservation-step .listing-car-items .listing-car-item .car-title {
+    color: #273F44;
+}
+
+.reservation-step .listing-car-items .listing-car-item .listing-car-item-meta .car-meta-top {
+    border-bottom: none;
+}
+
+.reservation-step .listing-car-item-inner a:hover {
+    color: white !important;
+}
+
+.reservation-step .btn-choose-product {
+    cursor: pointer;
+}
+
+/* Key characteristics */
+.mybooking-product_characteristics {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.mybooking-product_characteristics-item {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 0;
+  align-items: center;
+  text-align: center;
+}
+
+.mybooking-product_characteristics-img {
+  height: 30px;
+  width: 30px;
+}
+
+.mybooking-product_characteristics-key {
+  font-size: 13px;
+}
+
+/* Extras & Coverages */
+.mybooking-extra_container {
+  border: 1px solid #DDD;
+  margin-bottom: 50px;
+}
+
+.mybooking-extra_item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #DDD;
+  text-align: center;
+} @media ( min-width: 575.98px ) {
+  .mybooking-extra_item {
+    flex-flow: row;
+    text-align: left;
+  }
+}
+
+.mybooking-extra_item:last-of-type {
+  border-bottom: none;
+}
+
+.mybooking-extra_img {
+  max-width: 50px;
+  margin: 0 auto;
+}
+
+.mybooking-extra_name {
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.mybooking-extra_description {
+  line-height: 1.2;
+}
+
+.mybooking-extra_description p {
+  margin-bottom: 0.5rem;
+}
+
+.mybooking-extra_description br {
+  display: none;
+}
+
+.mybooking-extra_price {
+  font-weight: 700;
+}
+
+.mybooking-extra_price .extra-unitary {
+  font-size: 1.1em;
+}
+
+.mybooking-extra_price .extra-total {
+  font-weight: 400;
+}
+
+.mybooking-extra_control .mb-label {
+  margin: 0;
+}
+
+.mybooking-extra_control .mb-button {
+  display: inline-block;
+  padding: 0.4rem;
+}
+
+.mybooking-extra_control .mb-input {
+  display: inline-block;
+  max-width: 25px;
+}
+
+.mybooking-extra_control input[type="checkbox"],
+.mybooking-extra_control input[type="radio"] {
+    height: 10px;
+}
+
+/* Pay */
+button.mybooking_btn-pay {
+  margin-top: 2rem;
+  background: #F47B12!important;
+  font-weight: 700;
+  box-shadow: none!important;
 }

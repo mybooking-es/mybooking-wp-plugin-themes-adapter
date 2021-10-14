@@ -89,7 +89,7 @@
   <div class="form-group mybooking_rent_create_account_fields_container">
       <div class="form-group">
           <label for="account_password"><?php echo esc_html_x( 'Password', 'renting_complete_create_account', 'mybooking-wp-plugin') ?></label>
-          <input type="password" class="form-control" name="account_password" id="account_password"  autocomplete="off" placeholder="<?php echo esc_attr_x( 'Password', 'renting_complete_create_account', 'mybooking-wp-plugin') ?>:" maxlength="20">
+          <input type="password" class="for m-control" name="account_password" id="account_password"  autocomplete="off" placeholder="<?php echo esc_attr_x( 'Password', 'renting_complete_create_account', 'mybooking-wp-plugin') ?>:" maxlength="20">
           <small class="form-text text-muted"><?php echo esc_html_x( "Password must contain upper case letter, lower case letter, digit and symbol (@ ! * - _)", 'renting_complete_create_account', 'mybooking-wp-plugin') ?></small>
       </div>
   </div>  
@@ -111,48 +111,62 @@
 <!-- Extra representation -->
 
 <script type="text/template" id="script_detailed_extra">
-  <% if (extras.length > 0 ) { %>
-    <h2>Extras</h4>
-    <% for (var idx=0;idx<extras.length;idx++) { %>
-      <% var extra = extras[idx]; %>
-      <section class="hero <% if (idx % 2 == 0) { %>is-light<%}%>">
-        <div class="hero-body">
-          <div class="columns">
-            <div class="column is-one-third">
-              <label for="select<%=extra.code%>" class="is-size-5 has-text-weight-bold"><%=extra.name%></label>
-              <% if (extra.photo_path != null) { %>
-              <img src="<%=extra.photo_path%>"/>
-              <% } %>
+  <% if (extras && extras.length > 0) {%>
+    <div class="mb-section">
+      <h2 class="mb-section_title">
+        <?php echo esc_html_x( 'Extras', 'renting_complete', 'mybooking-wp-plugin') ?>
+      </h2>
+      <div class="mybooking-extra_container">
+
+        <% for (var idx=0;idx<extras.length;idx++) { %>
+          <% var extra = extras[idx]; %>
+          <% var value = (extrasInShoppingCart[extra.code]) ? extrasInShoppingCart[extra.code] : 0; %>
+          <% var bg = ((idx % 2 == 0) ? 'bg-light' : ''); %>
+
+          <div class="mybooking-extra_item <%=bg%>" data-extra="<%=extra.code%>">
+
+            <% if (extra.photo_path) { %>
+              <div class="col-md-2 col-sm-12">
+                <img class="mybooking-extra_img js-extra-info-btn" src="<%=extra.photo_path%>" alt="<%=extra.name%>" data-extra="<%=extra.code%>">
+              </div>
+              <div class="col-md-5 col-sm-12">
+                <div class="mybooking-extra_name">
+                  <%=extra.name%>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="col-md-7 col-sm-12">
+                <div class="mybooking-extra_name">
+                  <%=extra.name%>
+                </div>
+              </div>
+            <% } %>
+
+            <div class="col-md-3 col-sm-12">
+             <div class="mybooking-extra_price">
+               <%= configuration.formatExtraAmount(i18next, extra.one_unit_price, extra.price_calculation, shopping_cart.days, shopping_cart.hours, extra.unit_price)%>
+             </div>
             </div>
-            <div class="column is-one-third">
+
+            <div class="col-md-2 col-sm-12">
+
               <% if (extra.max_quantity > 1) { %>
-                <div class="field is-grouped">
-                  <button class="button is-primary btn-minus-extra" 
-                          data-value="<%=extra.code%>"
-                          data-max-quantity="<%=extra.max_quantity%>">-</button>           
-                  <div class="field">
-                    <div class="control">
-                    <% value = (extrasInShoppingCart[extra.code]) ? extrasInShoppingCart[extra.code] : 0; %>
-                    <input type="text" id="extra-<%=extra.code%>-quantity" 
-                           class="has-text-centered" readonly size="3" value="<%=value%>"/>
-                    </div>
-                  </div>
-                  <button class="button is-primary btn-plus-extra" 
-                          data-value="<%=extra.code%>"
-                          data-max-quantity="<%=extra.max_quantity%>">+</button>
+                <div class="mybooking-extra_control">
+                  <button class="mb-button control btn-minus-extra" data-value="<%=extra.code%>" data-max-quantity="<%=extra.max_quantity%>">-</button>
+                  <input class="mb-input extra-input" type="text" id="extra-<%=extra.code%>-quantity" value="<%=value%>" data-extra-code="<%=extra.code%>" readonly/>
+                  <button class="mb-button control btn-minus-plus" data-value="<%=extra.code%>" data-max-quantity="<%=extra.max_quantity%>">+</button>
                 </div>
               <% } else { %>
-                <input id="checkboxl<%=extra.code%>" type="checkbox" class="extra-checkbox" data-value="<%=extra.code%>" <% if (extrasInShoppingCart[extra.code] &&  extrasInShoppingCart[extra.code] > 0) { %> checked="checked" <% } %>>          
+                <div class="mybooking-extra_control">
+                  <input class="mb-checkbox extra-checkbox" type="checkbox" id="checkboxl<%=extra.code%>" data-value="<%=extra.code%>" <% if (extrasInShoppingCart[extra.code] &&  extrasInShoppingCart[extra.code] > 0) { %> checked="checked" <% } %>>
+                  <label class="mb-label" for="checkboxl<%=extra.code%>"></label>
+                </div>
               <% } %>
             </div>
-            <div class="column is-one-third">
-              <p class="is-size-4 has-text-weight-bold"><%= configuration.formatCurrency(extra.unit_price)%></p>
-            </div>  
           </div>
-        </div>
+        <% } %>
       </div>
-    </section>  
-    <% } %>
+    </div>
   <% } %>
 </script>
 
@@ -302,7 +316,7 @@
 
           <div class="row">
             <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-outline-dark"><?php echo esc_html_x( 'Request reservation', 'renting_complete', 'mybooking-wp-plugin' ) ?></button>
+              <button type="submit" class="mybooking_btn-pay btn-outline-dark"><?php echo esc_html_x( 'Request reservation', 'renting_complete', 'mybooking-wp-plugin' ) ?></button>
             </div>
           </div>
         </div>
@@ -335,7 +349,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-outline-dark"><?php echo esc_html_x( 'Confirm', 'renting_complete', 'mybooking-wp-plugin' ) ?></button>
+                    <button type="submit" class="mybooking_btn-pay btn-outline-dark"><?php echo esc_html_x( 'Confirm', 'renting_complete', 'mybooking-wp-plugin' ) ?></button>
                   </div>
                 </div>
             </div>
@@ -404,7 +418,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-outline-dark"><%=i18next.t('complete.reservationForm.payment_button',{amount: configuration.formatCurrency(paymentAmount)})%></a>
+                    <button type="submit" class="mybooking_btn-pay btn-outline-dark"><%=i18next.t('complete.reservationForm.payment_button',{amount: configuration.formatCurrency(paymentAmount)})%></a>
                   </div>
                 </div>
             </div>
