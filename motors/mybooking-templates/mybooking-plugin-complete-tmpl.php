@@ -177,14 +177,14 @@
   <h2 class="h4" style="border-bottom: 1px solid #ddd"><?php echo esc_html_x( 'Reservation summary', 'renting_complete', 'mybooking-wp-plugin') ?></h2>
 
   <% for (var idx=0; idx<shopping_cart.items.length; idx++) { %>
-  <div class="card">
-    <img class="card-img-top" src="<%=shopping_cart.items[idx].photo_medium%>"
-         alt="<%=shopping_cart.items[idx].item_description_customer_translation%>"
-         style="display: block; margin: 0 auto">
-    <div class="card-body">
-      <p class="card-text text-center"><strong><%=shopping_cart.items[idx].item_description_customer_translation%></strong></p>
+    <div class="card">
+      <img class="card-img-top" src="<%=shopping_cart.items[idx].photo_medium%>"
+           alt="<%=shopping_cart.items[idx].item_description_customer_translation%>"
+           style="display: block; margin: 0 auto">
+      <div class="card-body">
+        <p class="card-text text-center"><strong><%=shopping_cart.items[idx].item_description_customer_translation%></strong></p>
+      </div>
     </div>
-  </div>
   <% } %>
 
   <hr>
@@ -205,18 +205,65 @@
   <hr>
 
   <table class="table table-borderless">
+
     <tr>
       <td style="border:0"><span class="h4"><strong><?php echo MyBookingEngineContext::getInstance()->getProduct() ?></strong></span></td>
       <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.item_cost)%></span></td>
     </tr>
-    <tr>
-      <td style="border:0"><span class="h4"><strong><?php echo esc_html_x( 'Extras', 'renting_complete', 'mybooking-wp-plugin' ) ?></strong></span></td>
-      <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.extras_cost)%></span></td>
-    </tr>
+  
+    <% for (var idx=0;idx<shopping_cart.items.length;idx++) { %>
+      <% if (shopping_cart.items[idx].item_unit_cost_base != shopping_cart.items[idx].item_unit_cost) { %>
+        <!-- Discount -->
+        <tr>
+          <td style="border:0">
+             <% if (typeof shopping_cart.promotion_code !== 'undefined' && shopping_cart.promotion_code && shopping_cart.promotion_code !== '') { %>
+               <span class="h4" style="padding: 4px 15px; background-color: #f0f2f5; border-radius: 15px; font-size: 14px; color: #232628;"><%=configuration.formatCurrency(shopping_cart.items[idx].promotion_code_value, '',0)%>%&nbsp;<%=shopping_cart.promotion_code%></span>
+             <% } else if (typeof shopping_cart.items[idx].offer_name !== 'undefined' && shopping_cart.items[idx].offer_name && shopping_cart.items[idx].offer_name != '') { %>
+               <span class="h4" style="padding: 4px 15px; background-color: #f0f2f5; border-radius: 15px; font-size: 14px; color: #232628;"><%=configuration.formatCurrency(shopping_cart.items[idx].offer_value)%>%&nbsp;<%=shopping_cart.items[idx].offer_name%></span>
+             <% } %>
+          </td>
+          <td style="border:0"><span class="text-right" style="display: block; text-decoration: line-through;"><%=configuration.formatCurrency(shopping_cart.items[idx].item_unit_cost_base * shopping_cart.items[idx].quantity)%></span></td>
+        </tr>  
+      <% } %>
+    <% } %>
+
+    <% if (shopping_cart.extras_cost > 0) { %>
+      <tr>
+        <td style="border:0"><span class="h4"><strong><?php echo esc_html_x( 'Extras', 'renting_complete', 'mybooking-wp-plugin' ) ?></strong></span></td>
+        <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.extras_cost)%></span></td>
+      </tr>
+    <% } %>
+
+    <% if (shopping_cart.time_from_cost > 0) { %>
+      <tr>
+        <td style="border:0"><span class="h4"><strong><?php echo esc_html_x( 'Pick-up time supplement', 'renting_complete', 'mybooking-wp-plugin' ) ?></strong></span></td>
+        <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.time_from_cost)%></span></td>
+      </tr>
+    <% } %>
+    <% if (shopping_cart.pickup_place_cost > 0) { %>
+      <tr>
+        <td style="border:0"><span class="h4"><strong><?php echo esc_html_x( 'Pick-up place supplement', 'renting_complete', 'mybooking-wp-plugin' ) ?></strong></span></td>
+        <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.pickup_place_cost)%></span></td>
+      </tr>
+    <% } %>
+    <% if (shopping_cart.time_to_cost > 0) { %>
+      <tr>
+        <td style="border:0"><span class="h4"><strong><?php echo esc_html_x( 'Return time supplement', 'renting_complete', 'mybooking-wp-plugin' ) ?></strong></span></td>
+        <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.time_to_cost)%></span></td>
+      </tr>
+    <% } %>
+    <% if (shopping_cart.return_place_cost > 0) { %>
+      <tr>
+        <td style="border:0"><span class="h4"><strong><?php echo esc_html_x( 'Return place supplement', 'renting_complete', 'mybooking-wp-plugin' ) ?></strong></span></td>
+        <td style="border:0"><span class="h4 text-right" style="display:block"><%= configuration.formatCurrency(shopping_cart.return_place_cost)%></span></td>
+      </tr>
+    <% } %>
+
     <tr>
       <td style="border:0"><span class="h3"><?php echo esc_html_x( "Total", 'renting_complete', 'mybooking-wp-plugin' ) ?></span></td>
       <td style="border:0"><span class="h3 text-right" style="display:block; color:#af0000"><%= configuration.formatCurrency(shopping_cart.total_cost)%></span></td>
     </tr>
+
   </table>
 
 </script>

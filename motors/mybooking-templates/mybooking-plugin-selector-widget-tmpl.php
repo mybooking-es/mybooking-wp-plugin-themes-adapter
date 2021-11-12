@@ -49,6 +49,13 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-12">
+            <label style="margin-bottom:0.5em; margin-top: 0.5em"><strong><?php echo esc_html_x( 'Promotion code', 'renting_form_selector', 'mybooking-wp-plugin' ) ?></strong></label>
+            <input type="text" class="form-control" name="promotion_code" id="widget_promotion_code" autocomplete="off" maxlength="30">        
+          </div>
+        </div>    
+
         <div class="row" style="margin-top: 2em">
           <div class="col-md-12">
             <input class="button mybooking-btn_search" type="submit" value="<?php echo esc_html_x( 'Search', 'renting_form_selector', 'mybooking-wp-plugin') ?>" />

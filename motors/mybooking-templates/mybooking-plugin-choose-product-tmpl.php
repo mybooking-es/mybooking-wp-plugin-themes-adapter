@@ -16,6 +16,23 @@
                                 alt="<%=product.name%>">
                           </div>
                           <div class="listing-car-item-meta">
+
+                            <% if ( (product.offer_discount_type == 'percentage' || product.offer_discount_type == 'amount') || 
+                                    (typeof shoppingCart.promotion_code !== 'undefined' && shoppingCart.promotion_code !== null && shoppingCart.promotion_code !== '' && (product.promotion_code_discount_type == 'percentage' || product.promotion_code_discount_type == 'amount') )
+                                  ) { %>
+                              <!-- Promotion code or offer -->    
+                              <div class="single-car-actions" style="display: flex; justify-content: space-between">
+                                <% if (product.offer_discount_type == 'percentage' || product.offer_discount_type == 'amount') { %>
+                                  <div class="mybooking-product_discount-badge stock-num heading-font"><%=new Number(product.offer_value)%>% <%=product.offer_name%></div>
+                                <% } else if (typeof shoppingCart.promotion_code !== 'undefined' && shoppingCart.promotion_code !== null && shoppingCart.promotion_code !== '' && (product.promotion_code_discount_type == 'percentage' || product.promotion_code_discount_type == 'amount') ) { %>
+                                  <div class="mybooking-product_discount-badge stock-num heading-font"><%=new Number(product.promotion_code_value)%>% <%=shoppingCart.promotion_code%></div>
+                              <% } %>
+                              <% if (product.price != product.base_price) { %>
+                                <div class="mybooking-product_original-price" style="text-decoration: line-through;"><%= configuration.formatCurrency(product.base_price)%></div>
+                              <% } %>
+                            </div>  
+                            <% } %>
+
                             <div class="car-meta-top heading-font clearfix">
                                 <div class="price" style="background-color: transparent">
                                     <div class="normal-price" style="font-size: 1.1em; font-weight: 800">
@@ -38,9 +55,15 @@
                                   </div>
                                 <% } %>
                             </div>
-                            <div class="car-meta-bottom">
-                                <a class="button btn-choose-product" data-product="<%=product.code%>"><?php echo _x( 'Book it!', 'renting_choose_product', 'mybooking-wp-plugin') ?></a>
-                            </div>
+                            <% if (product.availability) { %>
+                              <div class="car-meta-bottom">
+                                  <a class="button btn-choose-product" data-product="<%=product.code%>"><?php echo _x( 'Book it!', 'renting_choose_product', 'mybooking-wp-plugin') ?></a>
+                              </div>
+                            <% } else { %>
+                              <div class="car-meta-bottom">
+                                <span class="badge badge-light w-100 text-center" style="padding: 1rem 1.4rem; display: block; text-transform: uppercase; font-size: 14px; border-radius: 3px;"><?php echo esc_html( MyBookingEngineContext::getInstance()->getNotAvailableMessage() ) ?></span>
+                               </div>
+                            <% } %>
                           </div>
                     </div>
                   </div>
