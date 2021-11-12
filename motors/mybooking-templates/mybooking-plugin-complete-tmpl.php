@@ -188,12 +188,12 @@
   <% } %>
 
   <hr>
-  
+
   <h3 class="h5 font-weight-normal"><?php echo MyBookingEngineContext::getInstance()->getDeliveryDate() ?></h3>
-  <p class="pb-2"><strong style="font-weight:600"><%=shopping_cart.date_from_full_format%></strong></p>
+  <p class="pb-2"><strong style="font-weight:600"><%=shopping_cart.date_from_full_format%> <%=shopping_cart.time_from%></strong></p>
   
   <h3 class="h5 font-weight-normal"><?php echo MyBookingEngineContext::getInstance()->getCollectionDate() ?></h3>
-  <p class="pb-2"><strong style="font-weight:600"><%=shopping_cart.date_from_full_format%></strong></p>
+  <p class="pb-2"><strong style="font-weight:600"><%=shopping_cart.date_to_full_format%> <%=shopping_cart.time_to%></strong></p>
 
   <% if (shopping_cart.days > 0) { %>
     <h3 class="h5 font-weight-normal"><?php echo MyBookingEngineContext::getInstance()->getDuration() ?></h3>
